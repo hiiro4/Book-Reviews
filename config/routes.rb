@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- root "public/homes#top"
+ root "public/books#index"
 
 devise_for :user,skip: [:passwords], controllers: {
   registrations: "public/registrations",
@@ -10,4 +10,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
+  namespace :admin do
+  end
+
+  namespace :public do
+    get 'homes/about'
+    resources :books,only:[:index, :create, :edit, :update,:destroy]
+  end
 end
