@@ -1,0 +1,22 @@
+<div class="container">
+
+<%= render "public/books/search" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>価格</th>
+      <th>画像</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @books.present? %>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= link_to book.title %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
