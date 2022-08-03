@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <table width="80%">
+      <% @book.each do |book| %>
+        <tbody class="book">
+          <tr>
+            <td rowspan="3"><img src="<%=book. large_image_url %>"></td>
+            <td><%= book.title %></td>
+          </tr>
+          <tr>
+            <td>著者:<%= book.author %></td>
+          </tr>
+          <tr>
+            <td>評価</td>
+            <td>登録</td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <table width="80%" class="mt-5">
+      <tr>
+        <td>レビュータイトル</td>
+        <td>ユーザー名</td>
+        <td>評価</td>
+        <td>いいね数</td>
+      </tr>
+    </table>
+  </div>
+</div>
