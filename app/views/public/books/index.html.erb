@@ -1,31 +1,30 @@
+<%= stylesheet_link_tag "application", :media => "all" %>
 <div class="container">
   <%= render "public/books/search" %>
-  <div class="row">
-    <table>
-      <thead>
-        <tr>
-          <th width="10%">画像</th>
-          <th width="30%">タイトル</th>
-          <th width="20%">著者</th>
-          <th width="10%">平均評価</th>
-          <th width="10%">気になる本登録</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @books.present? %>
-          <% @books.each do |book| %>
+  <% if @books.present? %>
+    <div class="row">
+      <table width="80%">
+        <% @books.first(20).each do |book| %>
+          <tbody class="book">
             <tr>
-              <td><img src="<%=book. large_image_url %>"></td>
-              <td><%= link_to book.title %></td>
-              <td><%= book.author %></td>
-              <td>サンプル</td>
-              <td>サンプル</td>
+              <td rowspan="3"><img src="<%=book. large_image_url %>"></td>
+              <td><%= link_to book.title,public_book_path(book.isbn) %></td>
             </tr>
-          <% end %>
-        <% else %>
-          <p>検索結果がみつかりませんでした。</p>
+            <tr>
+              <td>著者:<%= book.author %></td>
+            </tr>
+            <tr>
+              <td>評価</td>
+              <td>登録</td>
+            </tr>
+          </tbody>
         <% end %>
-      </tbody>
-    </table>
+      </table>
+    </div>
+  <% else %>
+    <p>検索結果がみつかりませんでした。</p>
+  <% end %>
+  <div class="row pt-5">
+    ページネーション
   </div>
 </div>

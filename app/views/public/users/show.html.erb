@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <table width="80%">
+      <td colspan="2">ユーザー名:<%= @user.name %></td>
+      <td>イチオシ</td>
+      <td>サンプル1</td>
+      <td>サンプル2</td>
+      <td>サンプル3</td>
+    </table>
+  </div>
+  <div class="row center-block">
+    <%= link_to "読みたい本一覧", public_book_path %>
+    <span>|</span>
+    <%= link_to "読んだ本一覧", public_book_path %>
+  </div>
+  <div class="row">
+    <%= link_to public_book_path do %>
+      <%= @user.name %>さんのレビュー一覧
+    <% end %>
+  </div>
+</div>

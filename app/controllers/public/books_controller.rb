@@ -6,8 +6,8 @@ class Public::BooksController < ApplicationController
     end
   end
 
-  def search
-
+  def show
+    @book = RakutenWebService::Books::Book.search(isbn: params[:id])
   end
 
 end
