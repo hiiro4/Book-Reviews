@@ -16,5 +16,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     get 'homes/about'
     resources :books,only:[:index, :show]
     resources :users,only:[:show, :index]
+    resources :reviews,only:[:show, :new, :index]
   end
 end
