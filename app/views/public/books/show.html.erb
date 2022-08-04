@@ -4,7 +4,7 @@
       <% @book.each do |book| %>
         <tbody class="book">
           <tr>
-            <td rowspan="3"><img src="<%=book. large_image_url %>"></td>
+            <td rowspan="3"><img src="<%=book.large_image_url %>"></td>
             <td><%= book.title %></td>
           </tr>
           <tr>
@@ -13,6 +13,7 @@
           <tr>
             <td>評価</td>
             <td>登録</td>
+            <td><%= link_to "レビューを書く", new_public_review_path(book.isbn) %></td>
           </tr>
         </tbody>
       <% end %>
