@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2022_07_30_064746) do
   create_table "books", force: :cascade do |t|
     t.string "title", null: false
     t.string "auther", null: false
-    t.string "book_", null: false
+    t.string "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -64,9 +64,9 @@ ActiveRecord::Schema.define(version: 2022_07_30_064746) do
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "book_id", null: false
-    t.string "title", null: false
-    t.text "body", null: false
-    t.integer "assess", null: false
+    t.string "title"
+    t.text "body"
+    t.float "assess"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

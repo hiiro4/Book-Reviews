@@ -4,9 +4,9 @@ class CreateReviews < ActiveRecord::Migration[6.1]
 
       t.integer:user_id   ,null:false
       t.string:book_id   ,null:false
-      t.string:title      ,null:false
-      t.text:body         ,null:false
-      t.integer:assess    ,null:false
+      t.string:title
+      t.text:body
+      t.float:assess
 
       t.timestamps
     end

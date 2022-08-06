@@ -4,7 +4,7 @@ class CreateBooks < ActiveRecord::Migration[6.1]
 
       t.string:title      ,null:false
       t.string:auther     ,null:false
-      t.string:book_  ,null:false
+      t.string:book_id  ,null:false
 
       t.timestamps
     end

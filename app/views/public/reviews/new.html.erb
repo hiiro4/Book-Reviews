@@ -2,7 +2,30 @@
   <div class="row">
     <% @book.each do |book| %>
     <%= book.title %>のレビュー
+    <%= form_with model:@review,url:public_reviews_path, method: :post do |review| %>
+    <%= review.text_field :title %>
+    <%= review.text_area :body %>
+  <!--星評価 -->
+    <div class="form-group row" id="star">
+    <%= review.label :assess,'評価 ', class:'col-md-3 col-form-label' %>
+    <%= review.hidden_field :assess, id: :star  %>
+    </div>
+  <!-- 評価javascript -->
+    <script>
+      $('#star').raty({
+        size     : 36,
+        starOff  :  '<%= asset_path('star-off.png') %>',
+        starOn   : '<%= asset_path('star-on.png') %>',
+        starHalf : '<%= asset_path('star-half.png') %>',
+        scoreName: 'review[assess]',
+        half     : true,
+      });
+    </script>
+  <!-- ここまで星評価 -->
+    <%= review.hidden_field :user_id, :value => current_user.id %>
+    <%= review.hidden_field :book_id, :value => book.isbn %>
+    <%= review.submit "投稿" %>
     <% end %>
-    
+    <% end %>
   </div>
 </div>
