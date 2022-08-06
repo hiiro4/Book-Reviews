@@ -13,7 +13,7 @@
           <tr>
             <td>評価</td>
             <td>登録</td>
-            <td><%= link_to "レビューを書く", new_public_review_path(book.isbn) %></td>
+            <td><%= link_to "レビューを書く", new_public_review_path(id:book.isbn) %></td><!--ISBNコードをIDとして使用 -->
           </tr>
         </tbody>
       <% end %>
@@ -25,6 +25,27 @@
         <td>評価</td>
         <td>いいね数</td>
       </tr>
+      <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.title %></td>
+        <td><%= review.user.name %></td>
+        <td><!--星評価-->
+          <div id="star-assess<%= review.id%>"> </div>
+          <script>
+            $('#star-assess<%= review.id%>').raty({
+              size      : 36,
+              starOff   : '<%= asset_path('star-off.png') %>',
+              starOn    : '<%= asset_path('star-on.png') %>',
+              starHalf  : '<%= asset_path('star-half.png') %>',
+              half      : true,
+              readOnly  : true,
+              score: <%= review.assess %>,
+            });
+          </script>
+        </td><!-- ここまで星評価 -->
+        <td>いいね数</td>
+      </tr>
+      <% end %>
     </table>
   </div>
 </div>
