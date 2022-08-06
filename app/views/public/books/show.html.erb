@@ -18,34 +18,29 @@
         </tbody>
       <% end %>
     </table>
-    <table width="80%" class="mt-5">
-      <tr>
-        <td>レビュータイトル</td>
-        <td>ユーザー名</td>
-        <td>評価</td>
-        <td>いいね数</td>
-      </tr>
-      <% @reviews.each do |review| %>
-      <tr>
-        <td><%= review.title %></td>
-        <td><%= review.user.name %></td>
-        <td><!--星評価-->
-          <div id="star-assess<%= review.id%>"> </div>
-          <script>
-            $('#star-assess<%= review.id%>').raty({
-              size      : 36,
-              starOff   : '<%= asset_path('star-off.png') %>',
-              starOn    : '<%= asset_path('star-on.png') %>',
-              starHalf  : '<%= asset_path('star-half.png') %>',
-              half      : true,
-              readOnly  : true,
-              score: <%= review.assess %>,
-            });
-          </script>
-        </td><!-- ここまで星評価 -->
-        <td>いいね数</td>
-      </tr>
-      <% end %>
-    </table>
   </div>
+  <% @reviews.each do |review| %>
+  <div style="width:100%;display:flex;justify-content:space-around">
+    <div>タイトル:<%= review.title %></div>
+    <div><%= review.user.name %>さんのレビュー</div>
+    <div><!--星評価-->
+      <div id="star-assess<%= review.id%>"></div>
+      <script>
+        $('#star-assess<%= review.id%>').raty({
+          size      : 36,
+          starOff   : '<%= asset_path('star-off.png') %>',
+          starOn    : '<%= asset_path('star-on.png') %>',
+          starHalf  : '<%= asset_path('star-half.png') %>',
+          half      : true,
+          readOnly  : true,
+          score: <%= review.assess %>,
+        });
+      </script>
+    </div><!-- ここまで星評価 -->
+    <div>いいね数</div>
+  </div>
+  <div style="width:80%;overflow-wrap: break-word;text-align:center;margin-bottom:5%">
+    <details><summary>内容を見る</summary><p style="height: 150px;overflow-wrap: break-word;overflow-y: scroll;text-align:left"><%= review.body %></p></details>
+  </div>
+  <% end %>
 </div>

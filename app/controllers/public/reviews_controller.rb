@@ -19,6 +19,11 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
+  def show
+    @review = Review.find(params[:id])
+    @book = RakutenWebService::Books::Book.search(isbn: @review.book_id)
+  end
+
   private
   def review_params
      params.require(:review).permit(:title, :body, :assess, :created_at, :book_id, :user_id ,:updated_at)
