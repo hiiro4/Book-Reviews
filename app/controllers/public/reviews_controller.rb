@@ -8,11 +8,9 @@ class Public::ReviewsController < ApplicationController
   def create
     @review=Review.new(review_params)
     if @review.save!
-
-    redirect_to "/public/books/#{ @review.book_id }"
+      redirect_to "/public/books/#{ @review.book_id }"
     else
       #binding.pry
-
       @book = RakutenWebService::Books::Book.search(isbn: params[:id])
       @review = Review.new
       render :new
@@ -26,7 +24,7 @@ class Public::ReviewsController < ApplicationController
 
   private
   def review_params
-     params.require(:review).permit(:title, :body, :assess, :created_at, :book_id, :user_id ,:updated_at)
+     params.require(:review).permit(:title, :body, :assess, :book_title, :created_at, :book_id, :user_id ,:updated_at)
   end
 
 end

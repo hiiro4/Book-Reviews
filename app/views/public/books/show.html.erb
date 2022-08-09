@@ -9,6 +9,7 @@
           </tr>
           <tr>
             <td>著者:<%= book.author %></td>
+            <td><%= link_to "楽天で商品を確認する",book.item_url %></td>
           </tr>
           <tr>
             <td>評価</td>
@@ -26,6 +27,7 @@
     <div><!--星評価-->
       <div id="star-assess<%= review.id%>"></div>
       <script>
+        $('#star-assess<%= review.id %>').empty();
         $('#star-assess<%= review.id%>').raty({
           size      : 36,
           starOff   : '<%= asset_path('star-off.png') %>',

@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "application", :media => "all" %>
 <div class="container">
   <div class="row">
     <table width="80%">
@@ -8,14 +9,53 @@
       <td>サンプル3</td>
     </table>
   </div>
-  <div class="row center-block">
-    <%= link_to "読みたい本一覧", public_book_path %>
-    <span>|</span>
-    <%= link_to "読んだ本一覧", public_book_path %>
+  <!--以下タブ部分 -->
+  <div class="wrap">
+    <ul id="tab-menu">
+        <li><a href="#tab1" class="active">読みたい本一覧</a></li>
+        <li><a href="#tab2" class="">読んだ本一覧</a></li>
+      </ul>
+  <!--タブの中身-->
+    <div id="tab-contents">
+      <div id="tab1" class="tab">
+        <div class="book"><%= render  public_will_book_path, books: @books %></div>
+      </div>
+
+      <div id="tab2" class="tab">
+        <div class="book"><%= render  public_read_book_path, books: @books %></div>
+      </div>
+    </div>
   </div>
+
+
+  <%= @user.name %>さんのレビュー一覧
   <div class="row">
-    <%= link_to public_book_path do %>
-      <%= @user.name %>さんのレビュー一覧
+    <% @reviews.each do |review| %>
+    <div style="width:100%;display:flex;justify-content:space-around">
+      <div><%= link_to review.book_title,public_book_path(review.book_id) %></div>
+      <div>タイトル:<%= review.title %></div>
+
+      <div><!--星評価-->
+        <div id="star-assess<%= review.id%>"></div>
+        <script>
+          $('#star-assess<%= review.id %>').empty();
+          $('#star-assess<%= review.id %>').raty({
+            size      : 36,
+            starOff   : '<%= asset_path('star-off.png') %>',
+            starOn    : '<%= asset_path('star-on.png') %>',
+            starHalf  : '<%= asset_path('star-half.png') %>',
+            half      : true,
+            readOnly  : true,
+            score: <%= review.assess %>,
+          });
+        </script>
+      </div><!-- ここまで星評価 -->
+
+      <div>いいね数</div>
+    </div>
+    <div style="width:80%;overflow-wrap: break-word;text-align:center;margin-bottom:5%">
+      <details><summary>内容を見る</summary><p style="height: 150px;overflow-wrap: break-word;overflow-y: scroll;text-align:left"><%= review.body %></p></details>
+    </div>
     <% end %>
   </div>
 </div>

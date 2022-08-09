@@ -1,9 +1,12 @@
+
 <div class="container">
   <div class="row">
     <table>
+      <% books.each do |will_read| %>
       <tr>
-        <td></td>
+        <td><%= will_read.book_title %></td>
       </tr>
+      <% end %>
     </table>
   </div>
 </div>
