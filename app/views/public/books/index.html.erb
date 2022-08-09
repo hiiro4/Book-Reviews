@@ -15,7 +15,7 @@
             </tr>
             <tr>
               <td>評価</td>
-              <td>登録</td>
+              <td><%= link_to "読みたい本に登録", public_bookshelves_will_read_create_path(id:book.isbn, book_title:book.title), method: :post %></td>
             </tr>
           </tbody>
         <% end %>

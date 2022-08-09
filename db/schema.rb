@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 2022_07_30_064746) do
   end
 
   create_table "bookshelves", force: :cascade do |t|
-    t.integer "read_id"
-    t.integer "will_read_id"
+    t.string "read_id"
+    t.string "will_read_id"
+    t.string "book_title"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -65,6 +67,7 @@ ActiveRecord::Schema.define(version: 2022_07_30_064746) do
     t.integer "user_id", null: false
     t.string "book_id", null: false
     t.string "title"
+    t.string "book_title"
     t.text "body"
     t.float "assess"
     t.datetime "created_at", precision: 6, null: false

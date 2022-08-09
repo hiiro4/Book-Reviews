@@ -24,6 +24,7 @@
   <!-- ここまで星評価 -->
     <%= review.hidden_field :user_id, :value => current_user.id %>
     <%= review.hidden_field :book_id, :value => book.isbn %>
+    <%= review.hidden_field :book_title, :value => book.title %>
     <%= review.submit "投稿" %>
     <% end %>
     <% end %>

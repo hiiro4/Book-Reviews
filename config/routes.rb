@@ -17,5 +17,10 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :books,only:[:index, :show]
     resources :users,only:[:show, :index]
     resources :reviews,only:[:show, :new, :index, :create]
+    resources :bookshelves,only:[:destroy]
+      post "bookshelves/will_read_create"
+      post "bookshelves/will_read_show", as: "will_book"
+      post "bookshelves/read_create"
+      post "bookshelves/read_show", as: "read_book"
   end
 end
