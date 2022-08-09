@@ -1,12 +1,20 @@
-<%= stylesheet_link_tag "application", :media => "all" %>
 <div class="container">
   <div class="row">
     <table width="80%">
+      <tr>
       <td colspan="2">ユーザー名:<%= @user.name %></td>
       <td>イチオシ</td>
       <td>サンプル1</td>
       <td>サンプル2</td>
       <td>サンプル3</td>
+      </tr>
+      <tr>
+        <% if current_user.following?(@user) %>
+          <td><%= link_to "フォロー外す", public_user_relationships_path(@user.id), method: :delete %></td>
+        <% else %>
+          <td><%= link_to "フォローする", public_user_relationships_path(@user.id), method: :post %></td>
+        <% end %>
+      </tr>
     </table>
   </div>
   <!--以下タブ部分 -->

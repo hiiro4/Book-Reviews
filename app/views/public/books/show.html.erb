@@ -23,7 +23,7 @@
   <% @reviews.each do |review| %>
   <div style="width:100%;display:flex;justify-content:space-around">
     <div>タイトル:<%= review.title %></div>
-    <div><%= review.user.name %>さんのレビュー</div>
+    <div><%=link_to review.user.name, public_user_path(id:review.user_id) %>さんのレビュー</div>
     <div><!--星評価-->
       <div id="star-assess<%= review.id%>"></div>
       <script>

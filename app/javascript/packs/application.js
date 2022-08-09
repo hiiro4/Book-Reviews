@@ -16,17 +16,7 @@ import '@fortawesome/fontawesome-free/js/all'
 
 window.$ = window.jQuery = require('jquery');
 require('packs/raty')
-
-/* global $*/
-$('#tab-contents .tab[id != "tab1"]').hide();
-
-$('#tab-menu a').on('click', function(event) {
-  $("#tab-contents .tab").hide();
-  $("#tab-menu .active").removeClass("active");
-  $(this).addClass("active");
-  $($(this).attr("href")).show();
-  event.preventDefault();
-});
+require('packs/tab')
 
 
 
