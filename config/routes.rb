@@ -15,7 +15,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   namespace :public do
     get 'homes/about'
     resources :books,only:[:index, :show]
-    resources :users,only:[:show, :index]
+    resources :users,only:[:show, :index] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
     resources :reviews,only:[:show, :new, :index, :create]
     resources :bookshelves,only:[:destroy]
       post "bookshelves/will_read_create"
