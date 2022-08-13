@@ -2,14 +2,10 @@
   <div class="row">
     <table width="80%">
       <tr>
-      <td colspan="2">ユーザー名:<%= @user.name %></td>
-      <td>イチオシ</td>
-      <td>サンプル1</td>
-      <td>サンプル2</td>
-      <td>サンプル3</td>
+        <td colspan="2">ユーザー名:<%= @user.name %></td>
       </tr>
-      <% if @user != current_user %>
-      <tr>
+      <% if @user.id != current_user.id %>
+      <tr><!-- フォロー機能 -->
         <% if current_user.following?(@user) %>
           <td><%= link_to "フォロー外す", public_user_relationships_path(@user.id), method: :delete %></td>
         <% else %>
@@ -33,11 +29,11 @@
   <!--タブの中身-->
     <div id="tab-contents">
       <div id="tab1" class="tab">
-        <div class="book"><%= render  public_will_book_path, books: @books %></div>
+        <div class="book"><%= render  "public/bookshelves/will_read_show" , books: @books %></div>
       </div>
 
       <div id="tab2" class="tab">
-        <div class="book"><%= render  public_read_book_path, books: @books %></div>
+        <div class="book"><%= render  "public/bookshelves/read_show", books: @books %></div>
       </div>
     </div>
   </div>

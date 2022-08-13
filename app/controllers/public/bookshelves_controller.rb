@@ -9,16 +9,20 @@ class Public::BookshelvesController < ApplicationController
   end
 
   def read_create
-    book_shelves = Bookshelf.new
+    book_shelves = Bookshelf.find(params[:id])
     book_shelves.read_id = book_shelves.will_read_id
-    book_shelves.will_read_id.destroy
-    #book_shelves.save
-    redirect_to public_user_path(params[:current_user.id])
+    book_shelves.will_read_id = nil
+    book_shelves.save
+    redirect_to public_user_path(current_user.id)
   end
 
-  def show
-    @boo = Bookshelf.where(user_id:params[:id])
+  def destroy
+    book_shelves = Bookshelf.find(params[:id])
+    book_shelves.destroy
+    redirect_to public_user_path(current_user.id)
   end
+
+
 
   private
   def book_shelf_params
