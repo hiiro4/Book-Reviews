@@ -6,20 +6,20 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :following
 
   has_many :reviews
+  has_many :favorites, dependent: :destroy
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   # フォローしたとき
   def follow(user_id)
-    relationships.create(be_followed_id: user_id)
+    relationships.create(be_followed_id:user_id)
   end
   # フォローを外すとき
   def unfollow(user_id)
-    relationships.find_by(be_followed_id: user_id).destroy
+    relationships.find_by(be_followed_id:user_id).destroy
   end
+
   # フォローしているか
   def following?(user)
     followings.include?(user)

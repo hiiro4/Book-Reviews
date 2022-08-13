@@ -21,6 +21,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
       get 'followers' => 'relationships#followers', as: 'followers'
     end
     resources :reviews,only:[:show, :new, :index, :create]
+    resource :favorites,only:[:create, :destroy]
     resources :bookshelves,only:[:destroy]
       post "bookshelves/will_read_create"
       post "bookshelves/will_read_show", as: "will_book"

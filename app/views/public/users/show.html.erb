@@ -8,6 +8,7 @@
       <td>サンプル2</td>
       <td>サンプル3</td>
       </tr>
+      <% if @user != current_user %>
       <tr>
         <% if current_user.following?(@user) %>
           <td><%= link_to "フォロー外す", public_user_relationships_path(@user.id), method: :delete %></td>
@@ -15,6 +16,12 @@
           <td><%= link_to "フォローする", public_user_relationships_path(@user.id), method: :post %></td>
         <% end %>
       </tr>
+      <% else %>
+        <tr>
+          <td>フォロー数: <%= @user.followings.count %></td>
+          <td>フォロワー数: <%= @user.followers.count %></td>
+        </tr>
+      <% end %>
     </table>
   </div>
   <!--以下タブ部分 -->
@@ -22,7 +29,7 @@
     <ul id="tab-menu">
         <li><a href="#tab1" class="active">読みたい本一覧</a></li>
         <li><a href="#tab2" class="">読んだ本一覧</a></li>
-      </ul>
+    </ul>
   <!--タブの中身-->
     <div id="tab-contents">
       <div id="tab1" class="tab">
@@ -43,7 +50,7 @@
       <div><%= link_to review.book_title,public_book_path(review.book_id) %></div>
       <div>タイトル:<%= review.title %></div>
 
-      <div><!--星評価-->
+      <div><!--星評価　部分テンプレート化すること-->
         <div id="star-assess<%= review.id%>"></div>
         <script>
           $('#star-assess<%= review.id %>').empty();
@@ -59,7 +66,24 @@
         </script>
       </div><!-- ここまで星評価 -->
 
-      <div>いいね数</div>
+      <div><!--いいね機能 部分テンプレート化すること-->
+        <% if review.user_id == current_user.id %>
+          ♥<%= review.favorites.count %> いいね
+        <% elsif review.favorited_by?(current_user) %>
+          <p>
+            <%= link_to  public_favorites_path(review:review.id,id:review.book_id), method: :delete do %>
+            ♥<%= review.favorites.count %> いいね
+            <% end %>
+          </p>
+        <% else %>
+          <p>
+          <%= link_to  public_favorites_path(review:review.id,id:review.book_id), method: :post do %>
+          ♡<%= review.favorites.count %> いいね
+          <% end %>
+          </p>
+        <% end %>
+      </div>
+
     </div>
     <div style="width:80%;overflow-wrap: break-word;text-align:center;margin-bottom:5%">
       <details><summary>内容を見る</summary><p style="height: 150px;overflow-wrap: break-word;overflow-y: scroll;text-align:left"><%= review.body %></p></details>
