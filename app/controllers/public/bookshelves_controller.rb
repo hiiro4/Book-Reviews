@@ -8,6 +8,14 @@ class Public::BookshelvesController < ApplicationController
     redirect_to public_book_path(params[:id])
   end
 
+  def read_create
+    book_shelves = Bookshelf.new
+    book_shelves.read_id = book_shelves.will_read_id
+    book_shelves.will_read_id.destroy
+    #book_shelves.save
+    redirect_to public_user_path(params[:current_user.id])
+  end
+
   def show
     @boo = Bookshelf.where(user_id:params[:id])
   end

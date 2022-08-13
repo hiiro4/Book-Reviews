@@ -9,6 +9,8 @@ class Public::BooksController < ApplicationController
   def show
     @book = RakutenWebService::Books::Book.search(isbn: params[:id])
     @reviews = Review.where(book_id: params[:id])
+    @averaege = 0
+    @count = 0
   end
 
 end

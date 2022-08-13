@@ -20,6 +20,7 @@ class Public::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @book = RakutenWebService::Books::Book.search(isbn: @review.book_id)
+
   end
 
   private

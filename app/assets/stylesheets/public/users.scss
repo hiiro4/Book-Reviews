@@ -10,8 +10,9 @@
 
 .wrap {
   width: 90%;
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
+  border: 1px solid #000;
 }
 
 #tab-menu {
@@ -20,18 +21,16 @@
 
 #tab-menu li {
   list-style-type: none;
-  width: 25%;
+  width: 100%;
 }
 
 #tab-menu li a {
   color: #fff;
   text-decoration: none;
   display: block;
-  padding: 20px;
+  padding: 10px 10px 0px 10px;
   text-align: center;
   background: #000;
-  border: 1px solid #000;
-  border-bottom: none;
 }
 
 #tab-menu .active {
@@ -42,18 +41,17 @@
 #tab-contents {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 0px;
 }
 
 #tab-contents .tab {
   width: 100%;
-  padding: 30px;
+  padding: 0px 10px 10px 10px;
   background: #fff;
-  border: 1px solid #000;
-  border-top: none;
-
 }
 
 #tab-contents .book {
   color: #000;
   line-height: 2.5;
+  border: none;
 }
