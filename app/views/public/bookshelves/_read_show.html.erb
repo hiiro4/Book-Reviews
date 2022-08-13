@@ -1,12 +1,19 @@
-<%= stylesheet_link_tag "application", :media => "all" %>
 <div class="container">
   <div class="row">
-    <table>
-      <% books.each do |will_read| %>
-      <tr>
-        <td><%= will_read.book_title %></td>
-      </tr>
+    <div>
+      <% books.each do |read| %>
+        <% if read.read_id.present? %>
+          <div class="book">
+            <div><%= link_to read.book_title, public_book_path(read.read_id) %></div>
+            <div><%= link_to "レビューを書く",new_public_review_path(id:read.read_id) %></div>
+            <% if @user.id = current_user.id %>
+              <div><%= link_to "削除", public_bookshelf_path(read),method: :delete %></div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>登録されていません</p>
+        <% end %>
       <% end %>
-    </table>
+    </div>
   </div>
 </div>
