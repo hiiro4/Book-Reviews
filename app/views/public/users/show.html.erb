@@ -42,19 +42,7 @@
   <%= @user.name %>さんのレビュー一覧
   <div class="row">
     <% @reviews.each do |review| %>
-    <div style="width:100%;display:flex;justify-content:space-around">
-      <div><%= link_to review.book_title,public_book_path(review.book_id) %></div>
-      <div>タイトル:<%= review.title %></div>
-      <div><!--星評価-->
-        <%= render "public/reviews/star", review:review %>
-      </div>
-      <div><!--いいね機能 -->
-      <%= render "public/reviews/favorite", review:review %>
-    </div>
-    </div>
-    <div style="width:80%;overflow-wrap: break-word;text-align:center;margin-bottom:5%">
-      <details><summary>内容を見る</summary><p style="height: 150px;overflow-wrap: break-word;overflow-y: scroll;text-align:left"><%= review.body %></p></details>
-    </div>
+      <%= render "public/reviews/review", review:review %>
     <% end %>
   </div>
 </div>

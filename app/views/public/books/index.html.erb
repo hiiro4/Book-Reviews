@@ -1,38 +1,21 @@
 <%= stylesheet_link_tag "application", :media => "all" %>
 <div class="container">
   <%= render "public/books/search" %>
+  <!--本検索結果 -->
   <% if @hit != 0  %>
-    <div class="row">
-      <table width="80%">
-        <% @books.first(20).each do |book| %>
-          <tbody style="border:1px solid black">
-            <tr>
-              <td rowspan="3"><img src="<%=book. large_image_url %>"></td>
-              <td><%= link_to book.title,public_book_path(book.isbn) %></td><!--ISBNコードをIDとして使用 -->
-            </tr>
-            <tr>
-              <td>著者:<%= book.author %></td>
-            </tr>
-            <tr>
-              <% if  Review.where(book_id:book.isbn).average(:assess).present? %>
-                <td>平均評価<%= Review.where(book_id:book.isbn).average(:assess) %></td>
-              <% else %>
-                <td>レビューがありません</td>
-              <% end %>
-              <!--本が読みたい本に登録されていない場合-->
-              <% unless @bookshelves.where(will_read_id:book.isbn).present? %>
-                <td><%= link_to "読みたい本に登録", public_bookshelves_will_read_create_path(id:book.isbn, book_title:book.title), method: :post %></td>
-              <% else %><!--登録されている場合、マイページへ-->
-                <td><%= link_to "本棚を確認する",public_user_path(current_user) %></td>
-              <% end %>
-            </tr>
-          </tbody>
-        <% end %>
-      </table>
-    </div>
+    <%= render "public/books/book" %>
   <% else %>
     <p>検索結果がみつかりませんでした。</p>
   <% end %>
+   <!--レビュー検索結果 -->
+  <% if @hoge == 1 %>
+    <% @reviews.each do |review| %>
+      <%= render "public/reviews/review", review:review %>
+    <% end %>
+  <% else %>
+  <p></p>
+  <% end %>
+
   <div class="row pt-5">
     ページネーション
   </div>

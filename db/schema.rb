@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 2022_07_30_064746) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "auther", null: false
-    t.string "search"
+    t.string "review_type"
+    t.string "review_range"
+    t.string "book_category"
     t.string "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
