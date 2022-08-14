@@ -10,13 +10,13 @@
 
 .wrap {
   width: 90%;
-  max-width: 100%;
   margin: 0 auto;
   border: 1px solid #000;
 }
 
 #tab-menu {
   display: flex;
+  width: 100%;
 }
 
 #tab-menu li {
@@ -54,4 +54,19 @@
   color: #000;
   line-height: 2.5;
   border: none;
+}
+
+.review{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.review div{
+  width: 25%;
+}
+
+.star{
+  background-position: center;
 }
