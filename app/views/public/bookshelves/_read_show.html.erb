@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-      <% if books.present? %><!--1冊登録されているか -->
+      <% if books.present? %><!--1冊以上登録されているか -->
         <% books.each do |read| %>
           <div class="book-shelf row">
             <div><%= link_to read.book_title, public_book_path(read.read_id) %></div>

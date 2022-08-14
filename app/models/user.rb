@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :reviews
   has_many :favorites, dependent: :destroy
+  has_many :favorite_review, through: :favorites, source: :review
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
