@@ -1,19 +1,22 @@
 <div class="container">
   <div class="row">
-    <div>
-      <% books.each do |read| %>
-        <% if read.read_id.present? %>
-          <div class="book">
+      <% if books.present? %><!--1冊登録されているか -->
+        <% books.each do |read| %>
+          <div class="book-shelf row">
             <div><%= link_to read.book_title, public_book_path(read.read_id) %></div>
-            <div><%= link_to "レビューを書く",new_public_review_path(id:read.read_id) %></div>
-            <% if @user.id = current_user.id %>
+            <% if @user.id == current_user.id %>
+              <% if @reviews.where(book_id:read.read_id).present? %><!--レビューを投稿してある場合 -->
+                <div><%= link_to "もう一度レビューを書く",new_public_review_path(id:read.read_id) %></div>
+              <% else %><!--　投稿していない場合 -->
+                <div><%= link_to "レビューを書く",new_public_review_path(id:read.read_id) %></div>
+              <% end %>
               <div><%= link_to "削除", public_bookshelf_path(read),method: :delete %></div>
             <% end %>
           </div>
-        <% else %>
-          <p>登録されていません</p>
         <% end %>
+      <% else %>
+      <p>登録されていません</p>
       <% end %>
-    </div>
   </div>
 </div>
+

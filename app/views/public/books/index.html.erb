@@ -20,7 +20,7 @@
                 <td>レビューがありません</td>
               <% end %>
               <!--本が読みたい本に登録されていない場合-->
-              <% unless Bookshelf.where(will_read_id:book.isbn).present? %>
+              <% unless @bookshelves.where(will_read_id:book.isbn).present? %>
                 <td><%= link_to "読みたい本に登録", public_bookshelves_will_read_create_path(id:book.isbn, book_title:book.title), method: :post %></td>
               <% else %><!--登録されている場合、マイページへ-->
                 <td><%= link_to "本棚を確認する",public_user_path(current_user) %></td>

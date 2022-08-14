@@ -24,6 +24,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resource :favorites,only:[:create, :destroy]
     resources :bookshelves,only:[:destroy]
       post "bookshelves/will_read_create"
-      post "bookshelves/read_create/:id", to: "bookshelves#read_create",as:"be_read"
+      post "bookshelves/read_create/:id", to: "bookshelves#read_create",as:"read"
   end
 end

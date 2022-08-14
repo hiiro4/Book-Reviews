@@ -9,10 +9,17 @@
 }
 
 
-.book{
+.book-shelf{
   margin: 0;
   padding: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-around;
+  text-align:center;
+}
+
+.book-shelf div{
+  width: 33%;
+}
+
+.book-shelf:only-child {
+  width: 100%;
 }
