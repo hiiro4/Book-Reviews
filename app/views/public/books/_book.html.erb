@@ -1,9 +1,9 @@
 <div class="row">
   <table width="80%">
-    <% @books.first(20).each do |book| %>
+    <% @books.each do |book| %>
       <tbody style="border:1px solid black">
         <tr>
-          <td rowspan="3"><img src="<%=book. large_image_url %>"></td>
+          <td rowspan="3"><img src="<%=book. medium_image_url %>"></td>
           <td><%= link_to book.title,public_book_path(book.isbn) %></td><!--ISBNコードをIDとして使用 -->
         </tr>
         <tr>
@@ -26,4 +26,3 @@
     <% end %>
   </table>
 </div>
-  

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- root "public/books#index"
+ root "public/users#top"
 
 devise_for :user,skip: [:passwords], controllers: {
   registrations: "public/registrations",
@@ -15,7 +15,12 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   namespace :public do
     get 'homes/about'
     resources :books,only:[:index, :show]
-    resources :users,only:[:show, :index] do
+    devise_scope :user do
+    post 'users/guest_sign_in', to: '/public/sessions#guest_sign_in'
+    end
+    get "users/follow/:id", to: "users#follow"
+    get "users/follower/:id", to: "users#follower"
+    resources :users,only:[:show, :top] do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'

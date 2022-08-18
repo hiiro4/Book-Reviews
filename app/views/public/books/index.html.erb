@@ -1,22 +1,30 @@
 <%= stylesheet_link_tag "application", :media => "all" %>
 <div class="container">
-  <%= render "public/books/search" %>
-  <!--本検索結果 -->
-  <% if @hit != 0  %>
-    <%= render "public/books/book" %>
-  <% else %>
-    <p>検索結果がみつかりませんでした。</p>
-  <% end %>
-   <!--レビュー検索結果 -->
-  <% if @hoge == 1 %>
-    <% @reviews.each do |review| %>
-      <%= render "public/reviews/review", review:review %>
-    <% end %>
-  <% else %>
-  <p></p>
-  <% end %>
+  <div class="row">
+    <div class="col-3">
 
-  <div class="row pt-5">
-    ページネーション
+    </div>
+    <div class="col-8">
+      <%= render "public/books/search" %>
+      <!--本検索結果 -->
+      <% if @hit != 0  %>
+        <%= render "public/books/book" %>
+      <% elsif @hit == 0 && @hoge ==0 %>
+        <p>検索結果がみつかりませんでした。</p>
+      <% else %>
+      <% end %>
+       <!--レビュー検索結果 -->
+      <% if @hoge == 1 %>
+        <% @reviews.each do |review| %>
+          <%= render "public/reviews/review", review:review %>
+        <% end %>
+      <% else %>
+      <% end %>
+    </div>
   </div>
+<% if @page.present? %>
+  <div class="row pt-5 text-center">
+    <%= paginate @page %>
+  </div>
+<% end %>
 </div>

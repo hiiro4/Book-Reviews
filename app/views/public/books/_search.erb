@@ -6,6 +6,6 @@
 <% end %>
 <%= form_with url:public_books_path, method: :get do |f| %>
 <%= f.select "review_type", options_for_select({ "いいねの多い順" => "favorite", "新着順" => "new" }) %>
-<%= f.select "review_range", options_for_select({ "全てのレビュー" => "all", "自分のレビュー" => "my" }) %>
+<%= f.select "review_range", options_for_select({ "全てのレビュー" => "all", "自分のレビュー" => "my","フォロワーのレビュー" => "follow" }) %>
 <%= f.submit "検索" %>
 <% end %>

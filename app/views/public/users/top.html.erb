@@ -1,0 +1,12 @@
+<div class="container text-center col-8">
+  <div class="text-left">
+    <p><strong>Book-Reviews</strong>へようこそ!<br>
+    このサイトでは、様々な本に対するレビューを投稿し、共有できます<br>
+    まずはゲストログインをクリックして、初めてみましょう!</p>
+    <div class="row" style="padding-top:20%">
+      <h3 class="text-center col-10 text-white bg-primary"><%= link_to "サインイン",new_user_session_path,class:"text-white" %></h3>
+      <h3 class="text-center col-10 text-white bg-success"><%= link_to "新規登録",new_user_registration_path,class:"text-white" %></h3>
+      <h3 class="text-center col-10 text-white bg-success"><%= link_to 'ゲストログイン（閲覧用）',public_users_guest_sign_in_path, method: :post,class:"text-white" %></h3>
+    </div>
+  </div>
+</div>
