@@ -20,12 +20,12 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     end
     get "users/follow/:id", to: "users#follow",       as:"follow"
     get "users/follower/:id", to: "users#follower",   as:"follower"
-    resources :users,only:[:show, :top] do
+    resources :users,only:[:show, :top, :destroy, :index] do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings',  as: 'followings'
       get 'followers' => 'relationships#followers',    as: 'followers'
     end
-    resources :reviews,only:[:show, :new, :index, :create]
+    resources :reviews,only:[:show, :new, :index, :create, :destroy]
     resource :favorites,only:[:create, :destroy]
     resources :bookshelves,only:[:destroy]
       post "bookshelves/will_read_create"

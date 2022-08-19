@@ -1,6 +1,8 @@
 class Public::UsersController < ApplicationController
+   before_action :specified_user, only: [:index, :destroy]
 
-  def top
+  def index
+    @users = User.all
   end
 
   def show
@@ -22,4 +24,14 @@ class Public::UsersController < ApplicationController
     @follow = User.where(id:follor)
   end
 
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    redirect_to  public_users_path
+  end
+
+  private
+  def specified_user
+    redirect_to public_books_path unless current_user.check == "2"
+  end
 end

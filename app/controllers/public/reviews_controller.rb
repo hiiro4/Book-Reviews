@@ -1,4 +1,5 @@
 class Public::ReviewsController < ApplicationController
+  before_action :specified_user, only: [ :destroy]
 
   def new
      @book = RakutenWebService::Books::Book.search(isbn: params[:id])
@@ -23,9 +24,19 @@ class Public::ReviewsController < ApplicationController
 
   end
 
+  def destroy
+    review = Review.find(params[:id])
+    review.destroy
+    redirect_to  public_books_path
+  end
+
   private
   def review_params
      params.require(:review).permit(:title, :body, :assess, :book_title, :created_at, :book_id, :user_id ,:updated_at)
+  end
+
+  def specified_user
+    redirect_to public_books_path unless current_user.check == "2"
   end
 
 end

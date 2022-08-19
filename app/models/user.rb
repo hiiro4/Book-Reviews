@@ -5,10 +5,10 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :be_followed
   has_many :followers, through: :reverse_of_relationships, source: :following
 
-  has_many :reviews
-  has_many :favorites, dependent: :destroy
+  has_many :reviews                               , dependent: :destroy
+  has_many :favorites                             , dependent: :destroy
   has_many :favorite_review, through: :favorites, source: :review
-
+ 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
