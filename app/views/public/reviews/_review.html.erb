@@ -34,6 +34,11 @@
       </p>
       <% end %>
     </div>
+    <% if current_user.check == "2" %>
+      <div>
+        <%= link_to "削除" ,public_review_path(review), method: :delete %>
+      </div>
+    <% end %>
   </div>
 <div style="width:80%;overflow-wrap: break-word;text-align:center;margin-bottom:5%">
   <details><summary>内容を見る</summary><p style="height: 150px;overflow-wrap: break-word;overflow-y: scroll;text-align:left"><%= review.body %></p></details>
