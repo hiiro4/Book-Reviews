@@ -1,5 +1,5 @@
 <div style="width:100%;display:flex;justify-content:space-around">
-    <div>本タイトル:<%= review.book_title %></div>
+    <div><%= link_to public_book_path(review.book_id) do %>本タイトル:<%= review.book_title %><% end %></div>
     <div>タイトル:<%= review.title %></div>
     <div><%=link_to review.user.name, public_user_path(id:review.user_id) %>さんのレビュー</div>
     <div><!--星評価-->

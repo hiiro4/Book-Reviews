@@ -15,6 +15,16 @@ class Public::BooksController < ApplicationController
       if params[:book_category] == "title" #検索方法の選択
         books = RakutenWebService::Books::Book.search(title: params[:keyword])
         @hit = books.count
+        @page = Kaminari.paginate_array([books], total_count: @hit).page(params[:page]).per(10)#kaminariページネーション
+        if params[:page].nil?
+          now_page = 1
+        else
+          now_page = params[:page]
+        end
+        @books = RakutenWebService::Books::Book.search(title: params[:keyword],page: now_page,hits: 10)#楽天からのページ毎に取得
+      elsif params[:book_category] == "author"
+        books = RakutenWebService::Books::Book.search(author: params[:keyword])
+        @hit = books.count
         @page = Kaminari.paginate_array([books], total_count: @hit).page(params[:page]).per(10)
         if params[:page].nil?
           now_page = 1
@@ -22,9 +32,6 @@ class Public::BooksController < ApplicationController
           now_page = params[:page]
         end
         @books = RakutenWebService::Books::Book.search(title: params[:keyword],page: now_page,hits: 10)
-      elsif params[:book_category] == "author"
-        @books = RakutenWebService::Books::Book.search(author: params[:keyword])
-        @hit = @books.count
       end
     else
       @hit = 0
@@ -33,19 +40,20 @@ class Public::BooksController < ApplicationController
     if params[:review_range] == "all"
       @reviews = Review.all #全てのレビューから検索
       @hoge = 1
-      @page = @reviews.page(params[:page])
+      @page = Kaminari.paginate_array([@reviews], total_count: @reviews.count).page(params[:page]).per(10)#kaminariページネーション
         if  params[:review_type] == "favorite"
-          @reviews = Review.includes(:favorite_users).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
+          @reviews = Review.includes(:favorite_users).page(params[:page]).per(10).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
         elsif params[:review_type] == "new"
-          @reviews = Review.all.order(created_at: :desc)
+          @reviews = Review.all.order(created_at: :desc).page(params[:page]).per(10)
         end
     elsif params[:review_range] == "my"
       @hoge = 1
-      @reviews = Review.where(user_id:current_user.id)    #自身のレビューから検索
+      @reviews = Review.where(user_id:current_user.id)#自身のレビューから検索
+      @page = Kaminari.paginate_array([@reviews], total_count: @reviews.count).page(params[:page]).per(10)#kaminariページネーション
         if  params[:review_type] == "favorite"
-          @reviews = @reviews.includes(:favorite_users).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
+          @reviews = @reviews.includes(:favorite_users).page(params[:page]).per(10).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
         elsif params[:review_type] == "new"
-          @reviews = Review.all.order(created_at: :desc)
+          @reviews = Review.all.order(created_at: :desc).page(params[:page]).per(10)
         end
     elsif params[:review_range] == "follow"
       @hoge = 1
@@ -53,11 +61,12 @@ class Public::BooksController < ApplicationController
          follower = Relationship.where(be_followed_id:current_user.id).pluck(:following_id)
          #byebug
          @reviews = Review.where(user_id:follower)#フォロワーのレビューを取得
-        if  params[:review_type] == "favorite"
-          @reviews = @reviews.includes(:favorite_users).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
-        elsif params[:review_type] == "new"
-          @reviews = Review.all.order(created_at: :desc)
-        end
+         @page = Kaminari.paginate_array([@reviews], total_count: @reviews.count).page(params[:page]).per(10)#kaminariページネーション
+          if  params[:review_type] == "favorite"
+            @reviews = @reviews.includes(:favorite_users).page(params[:page]).per(10).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
+          elsif params[:review_type] == "new"
+            @reviews = @reviews.all.order(created_at: :desc).page(params[:page]).per(10)
+          end
       else
         @judge = フォロワーがいません
       end

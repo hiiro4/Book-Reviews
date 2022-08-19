@@ -1,10 +1,7 @@
 <%= stylesheet_link_tag "application", :media => "all" %>
 <div class="container">
   <div class="row">
-    <div class="col-3">
-
-    </div>
-    <div class="col-8">
+    <div class="col-10 ml-5">
       <%= render "public/books/search" %>
       <!--本検索結果 -->
       <% if @hit != 0  %>
@@ -22,9 +19,9 @@
       <% end %>
     </div>
   </div>
-<% if @page.present? %>
+  <% if @page.present? %>
   <div class="row pt-5 text-center">
     <%= paginate @page %>
   </div>
-<% end %>
+  <% end %>
 </div>

@@ -13,13 +13,13 @@ class Public::UsersController < ApplicationController
   end
 
   def follow
-    follor = Relationship.where(be_followed_id:params[:id])
-    @follow = User.where(user_id:follor.following_id)
+    follor = Relationship.where(be_followed_id:params[:id]).pluck(:following_id)
+    @follow = User.where(id:follor)
   end
 
   def follower
-    follor = Relationship.where(following_id:params[:id])
-    @follow = User.where(user_id:follor.be_followed_id)
+    follor = Relationship.where(following_id:params[:id]).pluck(:be_followed_id)
+    @follow = User.where(id:follor)
   end
 
 end
