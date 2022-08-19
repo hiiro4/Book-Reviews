@@ -7,12 +7,12 @@ class Public::ReviewsController < ApplicationController
 
   def create
     @review=Review.new(review_params)
-    if @review.save!
+    if @review.save
       redirect_to "/public/books/#{ @review.book_id }"
     else
-      #binding.pry
       @book = RakutenWebService::Books::Book.search(isbn: params[:id])
       @review = Review.new
+      #byebug
       render :new
     end
   end

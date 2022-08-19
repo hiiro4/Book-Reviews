@@ -14,8 +14,8 @@
       </tr>
       <% else %>
         <tr>
-          <td><%= link_to public_path(params[:id]) do %>フォロー数: <%= @user.followings.count %><% end %></td>
-          <td>フォロワー数: <%= @user.followers.count %></td>
+          <td><%= link_to public_follow_path(params[:id]) do %>フォロー数: <%= @user.followings.count %><% end %></td>
+          <td><%= link_to  public_follower_path(params[:id]) do %>フォロワー数: <%= @user.followings.count %><% end %></td>
         </tr>
       <% end %>
     </table>
