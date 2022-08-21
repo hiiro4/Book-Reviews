@@ -1,7 +1,7 @@
 <div class="container">
   <% @users.each do |user| %>
     <div style="display:flex;justify-content:space-around;">
-      <div><%= link_to user.name, public_users_path(user) %></div>
+      <div><%= link_to user.name, public_user_path(user) %></div>
       <div><%= link_to "削除", public_user_path(user),method: :delete %></div>
     </div>
   <% end %>
