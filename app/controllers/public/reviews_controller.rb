@@ -8,11 +8,12 @@ class Public::ReviewsController < ApplicationController
 
   def create
     @review=Review.new(review_params)
+
     if @review.save
       redirect_to "/public/books/#{ @review.book_id }"
     else
-      @book = RakutenWebService::Books::Book.search(isbn: params[:id])
-      @review = Review.new
+      @book = RakutenWebService::Books::Book.search(isbn: @review.book_id)
+      #@review = Review.new
       #byebug
       render :new
     end
