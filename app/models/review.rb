@@ -6,7 +6,7 @@ class Review < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: :user
 
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true
   validates :assess, presence: true
 

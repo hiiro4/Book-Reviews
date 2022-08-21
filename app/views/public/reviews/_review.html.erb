@@ -1,6 +1,6 @@
-<div style="width:100%;display:flex;justify-content:space-around">
-    <div><%= link_to public_book_path(review.book_id) do %>本タイトル:<%= review.book_title %><% end %></div>
-    <div>タイトル:<%= review.title %></div>
+<div style="width:100%;display:flex;justify-content:space-arounds;flex-wrap: wrap;">
+    <div style="width:30%;"><%= link_to public_book_path(review.book_id) do %>本タイトル:<%= review.book_title %><% end %></div>
+    <div style="width:60%;">タイトル:<%= review.title %></div>
     <div><%=link_to review.user.name, public_user_path(id:review.user_id) %>さんのレビュー</div>
     <div><!--星評価-->
       <div id="star-assess<%= review.id%>"></div>
@@ -17,7 +17,7 @@
         });
       </script>
     </div>
-    <div><!--いいね機能 -->
+    <div style="margin-left:20%;"><!--いいね機能 -->
       <% if review.user_id == current_user.id %>
         ♥<%= review.favorites.count %> いいね
       <% elsif review.favorited_by?(current_user) %>
