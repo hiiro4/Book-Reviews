@@ -4,10 +4,10 @@
     <%= book.title %>のレビュー
     <%= form_with model:@review,url:public_reviews_path, method: :post do |review| %>
     <div class="text-center pt-5">
-      <%= review.text_field :title, placeholder:"レビュータイトル" %>
+      <%= review.text_field :title, placeholder:"レビュータイトル(最大255字)", class: 'form-control',size: "5x1"  %>
     </div>
     <div class="text-center pt-3">
-    <%= review.text_area :body, placeholder:"レビュー本文"  %>
+    <%= review.text_area :body, placeholder:"レビュー本文", class: 'form-control',size: "20x10" %>
     </div>
   <!--星評価 -->
     <div class="pl-5 text-center">
