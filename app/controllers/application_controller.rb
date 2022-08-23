@@ -9,4 +9,7 @@ class ApplicationController < ActionController::Base
     public_books_path
   end
 
+  def after_update_path_for(resource)
+     public_user_path(current_user)
+  end
 end

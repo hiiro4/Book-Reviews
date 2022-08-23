@@ -31,6 +31,7 @@ class Public::UsersController < ApplicationController
   end
 
   private
+
   def specified_user
     redirect_to public_books_path unless current_user.check == "2"
   end

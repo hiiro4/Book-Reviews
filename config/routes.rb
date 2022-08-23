@@ -20,7 +20,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     end
     get "users/follow/:id", to: "users#follow",       as:"follow"
     get "users/follower/:id", to: "users#follower",   as:"follower"
-    resources :users,only:[:show, :top, :destroy, :index] do
+    resources :users,only:[:show, :top, :destroy, :index, :edit, :update] do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings',  as: 'followings'
       get 'followers' => 'relationships#followers',    as: 'followers'

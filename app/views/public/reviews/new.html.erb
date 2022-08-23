@@ -28,6 +28,13 @@
       </script>
     </div>
   <!-- ここまで星評価 -->
+    <div>
+      <h3>投稿いただく前に下記をお読みください。</h3>
+      <p style="text-align:justify">本は読了直後、読み返した時、読了後しばらく時間を置いた時、それぞれで評価が変わる可能性がございます。</br>
+          そこで、当サイトではレビューを投稿いただいた瞬間の評価を大切にしたいと考え、一度投稿いただいたレビューに対して編集、削除ができない仕様となっております。</br>
+          今一度誤字、脱字がないかお確かめください。</p>
+      <p>＊評価の高低に関わらず、社会通念上不適切な投稿は削除させていただきます。</p>
+    </div>
     <%= review.hidden_field :user_id, :value => current_user.id %>
     <%= review.hidden_field :book_id, :value => book.isbn %>
     <%= review.hidden_field :book_title, :value => book.title %>
