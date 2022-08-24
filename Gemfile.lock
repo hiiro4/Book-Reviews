@@ -265,7 +265,7 @@ DEPENDENCIES
   dotenv-rails
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)
-  listen (~> 3.3)
+  listen (~> 3.7.1)
   mysql2
   net-imap
   net-pop
@@ -274,6 +274,8 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.6, >= 6.1.6.1)
   rakuten_web_service
+  rb-fsevent (~> 0.11.1)
+  rb-inotify (~> 0.10.1)
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
