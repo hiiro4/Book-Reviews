@@ -1,13 +1,13 @@
 
 <div class="container">
-  <div class="row">
+  <div class="row bookshelf-box">
       <% if books.present? %><!--1冊以上登録されているか -->
         <% books.each do |will_read| %>
           <div class="book-shelf row">
-            <div><%= link_to will_read.book_title, public_book_path(will_read.will_read_id) %></div>
+            <div><%= link_to will_read.book_title, public_book_path(will_read.will_read_id), class:"text-dark btn btn-outline-primary" %></div>
             <% if @user.id == current_user.id %>
-              <div><%= link_to "読んだ本に追加する",  public_read_path(will_read.id), method: :post %></div>
-              <div><%= link_to "削除", public_bookshelf_path(will_read),method: :delete %></div>
+              <div><%= link_to "読んだ本に追加する",  public_read_path(will_read.id), method: :post, class:"text-dark btn btn-success" %></div>
+              <div><%= link_to "削除", public_bookshelf_path(will_read),method: :delete, class:"text-dark btn btn-danger" %></div>
             <% end %>
           </div>
         <% end %>

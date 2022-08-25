@@ -8,12 +8,21 @@
   box-sizing: border-box;
 }
 
+.bookshelf-box{
+  height: 300px;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+  text-align: left
+}
+
 
 .book-shelf{
   margin: 0;
-  padding: 0;
+  padding-bottom: 5px;
   width: 100%;
-  text-align:center;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
 }
 
 .book-shelf div{

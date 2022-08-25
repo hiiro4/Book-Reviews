@@ -9,7 +9,7 @@
           </tr>
           <tr>
             <td>著者:<%= book.author %></td>
-            <td><%= link_to "楽天で商品を確認する",book.item_url %></td>
+            <td><%= link_to "楽天で商品を確認する",book.item_url, class:"text-dark btn btn-outline-warning" %></td>
           </tr>
           <tr>
             <% if @average.present? %><!--　レビューが投稿されているか -->
@@ -19,14 +19,14 @@
             <% end %>
             <!--本が読みたい本に登録されていない場合-->
             <% unless @bookshelves.where(will_read_id:book.isbn).present? %>
-              <td><%= link_to "読みたい本に登録", public_bookshelves_will_read_create_path(id:book.isbn, book_title:book.title), method: :post %></td>
+              <td class="btn btn-info"><%= link_to "読みたい本に登録", public_bookshelves_will_read_create_path(id:book.isbn, book_title:book.title), method: :post, class:"text-dark btn btn-info" %></td>
             <% else %><!--登録されている場合、マイページへ-->
-              <td><%= link_to "本棚を確認する",public_user_path(current_user) %></td>
+              <td ><%= link_to "本棚を確認する",public_user_path(current_user), class:"text-dark btn btn-outline-info" %></td>
             <% end %>
             <% if @review.where(book_id:book.isbn).present? %><!--レビューを投稿したことがあるか-->
-              <td><%= link_to "もう一度レビューを書く", new_public_review_path(id:book.isbn) %></td><!--ISBNコードをIDとして使用 -->
+              <td class="ml-2"><%= link_to "もう一度レビューを書く", new_public_review_path(id:book.isbn), class:"text-dark btn btn-outline-success" %></td><!--ISBNコードをIDとして使用 -->
             <% else %>
-              <td><%= link_to "レビューを書く", new_public_review_path(id:book.isbn) %></td>
+              <td><%= link_to "レビューを書く", new_public_review_path(id:book.isbn), class:"text-dark btn btn-success ml-2" %></td>
             <% end %>
           </tr>
         </tbody>

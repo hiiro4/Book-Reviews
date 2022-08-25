@@ -4,7 +4,7 @@
       <tbody style="border:1px solid black">
         <tr>
           <td rowspan="3"><img src="<%=book. medium_image_url %>"></td>
-          <td><%= link_to book.title,public_book_path(book.isbn) %></td><!--ISBNコードをIDとして使用 -->
+          <td><%= link_to book.title,public_book_path(book.isbn), class:"text-dark btn btn-outline-primary" %></td><!--ISBNコードをIDとして使用 -->
         </tr>
         <tr>
           <td>著者:<%= book.author %></td>
@@ -17,9 +17,9 @@
           <% end %>
           <!--本が読みたい本に登録されていない場合-->
           <% unless @bookshelves.where(will_read_id:book.isbn).present? %>
-            <td><%= link_to "読みたい本に登録", public_bookshelves_will_read_create_path(id:book.isbn, book_title:book.title), method: :post %></td>
+            <td><%= link_to "読みたい本に登録", public_bookshelves_will_read_create_path(id:book.isbn, book_title:book.title), method: :post, class:"text-dark btn btn-info" %></td>
           <% else %><!--登録されている場合、マイページへ-->
-            <td><%= link_to "本棚を確認する",public_user_path(current_user) %></td>
+            <td><%= link_to "本棚を確認する",public_user_path(current_user), class:" text-dark btn btn-outline-info" %></td>
           <% end %>
         </tr>
       </tbody>

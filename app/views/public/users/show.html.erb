@@ -5,7 +5,7 @@
         <td colspan="2">ユーザー名:<%= @user.name %></td>
 
         <% if @user.id == current_user.id %><!--ユーザー名、メールアドレedit_public_user_pathスの変更-->
-          <td><%= link_to "ユーザー名を変更する(ゲストユーザーは変更できません)", edit_user_registration_path(current_user) %></td>
+          <td><%= link_to "ユーザー名を変更する(ゲストユーザーは変更できません)", edit_user_registration_path(current_user), class:"text-dark btn btn-warning" %></td>
         <% end %>
       </tr>
       <% if @user.id != current_user.id %>
@@ -18,8 +18,8 @@
       </tr>
       <% else %>
         <tr>
-          <td><%= link_to public_follow_path(params[:id]) do %>フォロー数: <%= @user.followings.count %><% end %></td>
-          <td><%= link_to  public_follower_path(params[:id]) do %>フォロワー数: <%= @user.followings.count %><% end %></td>
+          <td>フォロー数: <%= link_to @user.followings.count, public_follower_path(params[:id]) %></td>
+          <td>フォロワー数: <%= link_to @user.followers.count, public_follow_path(params[:id]) %></td>
         </tr>
       <% end %>
     </table>

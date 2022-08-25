@@ -1,9 +1,9 @@
 <div class="container">
-  <div>フォローユーザー一覧</div>
+  <div>フォロワーユーザー一覧</div>
   <table class="follow">
     <% @follow.each do |follow| %>
     <tr>
-      <td><%= link_to follow.name, public_user_path(follow) %></td>
+      <td><%= link_to follow.name, public_user_path(follow), class:"text-dark btn btn-outline-secondary" %></td>
     </tr>
     <% end %>
   </table>
