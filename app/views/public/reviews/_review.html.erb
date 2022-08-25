@@ -1,7 +1,7 @@
 <div style="width:100%;display:flex;justify-content:space-arounds;flex-wrap: wrap;">
-    <div style="width:30%;"><%= link_to public_book_path(review.book_id) do %>本タイトル:<%= review.book_title %><% end %></div>
-    <div style="width:60%;">タイトル:<%= review.title %></div>
-    <div><%=link_to review.user.name, public_user_path(id:review.user_id) %>さんのレビュー</div>
+    <div style="width:30%;">本タイトル:<%= link_to review.book_title, public_book_path(review.book_id), class:"text-dark btn btn-outline-primary"%></div>
+    <div style="width:60%;text-align: center;">レビュータイトル:<%= review.title %></div>
+    <div><%=link_to review.user.name, public_user_path(id:review.user_id), class:"text-dark btn btn-outline-secondary" %>さんのレビュー</div>
     <div><!--星評価-->
       <div id="star-assess<%= review.id%>"></div>
       <script>
