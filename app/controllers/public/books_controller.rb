@@ -1,12 +1,13 @@
 class Public::BooksController < ApplicationController
 
   def index
-    #ジャンル一覧取得
-    #roots = RakutenWebService::Books::Genre.root (bookapiだがbook以外も取得)
+    #ジャンル一覧取得books_genre_id
+    #roots = RakutenWebService::Books::Genre.root
     #byebug
     #roots.children.each do |child|
     #byebug
-    # @put = child.booksGenreName   取得不能(名称は合っている)
+     #@put = child.booksGenreName
+    #byebug
     #end
     #byebug
     #本の検索
@@ -68,7 +69,7 @@ class Public::BooksController < ApplicationController
             @reviews = @reviews.all.order(created_at: :desc).page(params[:page]).per(10)
           end
       else
-        @judge = フォロワーがいません
+        @hoge = 0
       end
     else
        @reviews = Review.all.order(created_at: :desc)

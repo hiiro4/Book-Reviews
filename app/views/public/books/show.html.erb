@@ -18,7 +18,7 @@
               <td>レビューがありません</td>
             <% end %>
             <!--本が読みたい本に登録されていない場合-->
-            <% unless @bookshelves.where(will_read_id:book.isbn).present? %>
+            <% unless @bookshelves.where(will_read_id:book.isbn).present? || @bookshelves.where(read_id:book.isbn).present? %>
               <td class="btn btn-info"><%= link_to "読みたい本に登録", public_bookshelves_will_read_create_path(id:book.isbn, book_title:book.title), method: :post, class:"text-dark btn btn-info" %></td>
             <% else %><!--登録されている場合、マイページへ-->
               <td ><%= link_to "本棚を確認する",public_user_path(current_user), class:"text-dark btn btn-outline-info" %></td>
