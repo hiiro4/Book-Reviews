@@ -80,8 +80,8 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
   #ゲストユーザーをemailで判別
   def ensure_normal_user
-    if resource.email == 'guest@example.com'
-      redirect_to public_user_path(current_user), notice: 'ゲストユーザーの更新・削除はできません。'
+    if resource.check != 1
+      redirect_to public_user_path(current_user), notice: '更新・削除はできません。'
     end
   end
 

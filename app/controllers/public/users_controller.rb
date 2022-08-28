@@ -2,7 +2,8 @@ class Public::UsersController < ApplicationController
    before_action :specified_user, only: [:index, :destroy]
 
   def index
-    @users = User.all
+    users = User.where.not(check:2)
+    @users = users.where.not(check:3)
   end
 
   def show
