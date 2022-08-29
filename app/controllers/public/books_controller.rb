@@ -37,7 +37,9 @@ class Public::BooksController < ApplicationController
     else
       @hit = 0
     end
+
     #レビューの検索
+
     if params[:review_range] == "all"
       @reviews = Review.all #全てのレビューから検索
       @hoge = 1
@@ -46,6 +48,9 @@ class Public::BooksController < ApplicationController
           @reviews = Review.includes(:favorite_users).page(params[:page]).per(10).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
         elsif params[:review_type] == "new"
           @reviews = Review.all.order(created_at: :desc).page(params[:page]).per(10)
+        elsif params[:review_type] == "my-favorite"
+          my_favorite = Favorite.where(user_id: current_user.id).pluck(:review_id)
+          @reviews = Review.where(id: my_favorite).page(params[:page]).per(10)
         end
     elsif params[:review_range] == "my"
       @hoge = 1
@@ -55,11 +60,14 @@ class Public::BooksController < ApplicationController
           @reviews = @reviews.includes(:favorite_users).page(params[:page]).per(10).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
         elsif params[:review_type] == "new"
           @reviews = Review.all.order(created_at: :desc).page(params[:page]).per(10)
+        elsif params[:review_type] == "my-favorite"
+          my_favorite = Favorite.where(user_id: current_user.id).pluck(:review_id)
+          @reviews = Review.where(id: my_favorite).page(params[:page]).per(10)
         end
     elsif params[:review_range] == "follow"
       @hoge = 1
-      if Relationship.where(be_followed_id:current_user.id).present?#フォロワーを取得、存在を判定
-         follower = Relationship.where(be_followed_id:current_user.id).pluck(:following_id)
+      if Relationship.where(following_id:current_user.id).present?#フォローユーザがいるか判定
+         follower = Relationship.where(following_id:current_user.id).pluck(:be_followed_id)
          #byebug
          @reviews = Review.where(user_id:follower)#フォロワーのレビューを取得
          @page = Kaminari.paginate_array([@reviews], total_count: @reviews.count).page(params[:page]).per(10)#kaminariページネーション
@@ -67,6 +75,9 @@ class Public::BooksController < ApplicationController
             @reviews = @reviews.includes(:favorite_users).page(params[:page]).per(10).sort {|a,b| b.favorite_users.size <=> a.favorite_users.size}
           elsif params[:review_type] == "new"
             @reviews = @reviews.all.order(created_at: :desc).page(params[:page]).per(10)
+          elsif params[:review_type] == "my-favorite"
+            my_favorite = Favorite.where(user_id: current_user.id).pluck(:review_id)
+            @reviews = Review.where(id: my_favorite).page(params[:page]).per(10)
           end
       else
         @hoge = 0
