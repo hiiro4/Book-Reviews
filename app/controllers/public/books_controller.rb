@@ -3,13 +3,9 @@ class Public::BooksController < ApplicationController
   def index
     #ジャンル一覧取得books_genre_id
     #roots = RakutenWebService::Books::Genre.root
-    #byebug
     #roots.children.each do |child|
-    #byebug
      #@put = child.booksGenreName
-    #byebug
     #end
-    #byebug
     #本の検索
     @bookshelves = Bookshelf.where(user_id:current_user.id)
     if params[:keyword].present? #入力されているか
